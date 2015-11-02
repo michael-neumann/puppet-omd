@@ -1,4 +1,4 @@
-# == Class: omd::server::customer_check
+# == Class: omd::site::customer_check
 #
 # This define creates a custom_check which will run on the omd server.
 # Custom checks are similar to the legacy_check configuration.
@@ -49,7 +49,7 @@
 #
 # === Examples
 #
-# omd::server::customer_check { 'check_webservers':
+# omd::site::customer_check { 'check_webservers':
 #   site                => 'default',
 #   host_tags           => 'webservers',
 #   service_description => 'Check HTTP',
@@ -57,7 +57,7 @@
 #   command_name        => 'check-webservers',
 # }
 
-define omd::server::custom_check (
+define omd::site::custom_check (
   $site,
   $service_description,
   $filename     = $title,
