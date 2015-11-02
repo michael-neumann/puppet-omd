@@ -72,4 +72,8 @@ define omd::site::ldap (
     path    => $ldap_file,
     require => File[$ldap_file],
   }
+
+  # Enable multisite cookie auth
+  # TODO flag to manage this?
+  omd::site::config_variable { "${site} - MULTISITE_COOKIE_AUTH = on": }
 }
