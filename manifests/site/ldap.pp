@@ -67,7 +67,7 @@ define omd::site::ldap (
 
   file_line { 'user_connectors':
     ensure  => present,
-    line    => 'ldap_cache_livetime = 300',
+    line    => 'user_connectors = [\'htpasswd\', \'ldap\']',
     match   => 'user_connectors',
     path    => $ldap_file,
     require => File[$ldap_file],
@@ -77,3 +77,5 @@ define omd::site::ldap (
   # TODO flag to manage this?
   omd::site::config_variable { "${site} - MULTISITE_COOKIE_AUTH = on": }
 }
+
+#TODO exec
