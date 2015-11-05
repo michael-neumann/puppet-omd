@@ -28,50 +28,11 @@ define omd::site::ldap (
   $ldap_file = "/opt/omd/sites/${site}/etc/check_mk/multisite.d/wato/global.mk"
 
   file { $ldap_file:
-    ensure => present,
-    owner  => $site,
-    group  => $site,
-    mode   => '0660',
-  }
-
-  file_line { 'ldap_cache_livetime':
     ensure  => present,
-    line    => 'ldap_cache_livetime = 300',
-    match   => 'ldap_cache_livetime',
-    path    => $ldap_file,
-    require => File[$ldap_file],
-  }
-
-  file_line { 'ldap_connection':
-    ensure  => present,
-    line    => "ldap_connection = {'bind': ('${ldap_bind_dn}', '${ldap_bind_pw}'), 'connect_timeout': 2.0, 'page_size': 1000, 'port': ${ldap_port}, 'server': '${ldap_server}', 'type': 'ad', 'version': 3}",
-    match   => 'ldap_connection',
-    path    => $ldap_file,
-    require => File[$ldap_file],
-  }
-
-  file_line { 'ldap_groupspec':
-    ensure  => present,
-    line    => "ldap_groupspec = {'dn': '${ldap_group_dn}', 'scope': 'sub'}",
-    match   => 'ldap_groupspec',
-    path    => $ldap_file,
-    require => File[$ldap_file],
-  }
-
-  file_line { 'ldap_user_spec':
-    ensure  => present,
-    line    => "ldap_userspec = {'dn': '${ldap_user_dn}', 'filter': '${filter_real}', 'scope': 'sub', 'user_id_umlauts': 'replace'}",
-    match   => 'ldap_user_spec',
-    path    => $ldap_file,
-    require => File[$ldap_file],
-  }
-
-  file_line { 'user_connectors':
-    ensure  => present,
-    line    => 'user_connectors = [\'htpasswd\', \'ldap\']',
-    match   => 'user_connectors',
-    path    => $ldap_file,
-    require => File[$ldap_file],
+    owner   => $site,
+    group   => $site,
+    mode    => '0660',
+    content => template('omd/global.mk.erb'),
   }
 
   # Enable multisite cookie auth
