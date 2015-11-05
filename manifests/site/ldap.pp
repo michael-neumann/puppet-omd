@@ -28,9 +28,10 @@ define omd::site::ldap (
   $ldap_file = "/opt/omd/sites/${site}/etc/check_mk/multisite.d/wato/global.mk"
 
   file { $ldap_file:
-    owner => $site,
-    group => $site,
-    mode  => '0660',
+    ensure => present,
+    owner  => $site,
+    group  => $site,
+    mode   => '0660',
   }
 
   file_line { 'ldap_cache_livetime':
