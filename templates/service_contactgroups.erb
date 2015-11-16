@@ -18,9 +18,9 @@
   if @services.include? 'ALL_SERVICES'
     service_out = 'ALL_SERVICES'
   else
-    service_out = '["' + @services.join('", "') + '"]"'
+    service_out = '["' + @services.join('", "') + '"]'
   end
 -%>
 
 define_contactgroups = True
-service_contactgroups += [ ( <%= @contact_group_name %>, <%= host_out %>, <%= service_out %> ), ]
+service_contactgroups += [ ( '<%= @contact_group_name %>', <%= host_out %>, <%= service_out %> ), ]
