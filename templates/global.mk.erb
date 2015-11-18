@@ -13,7 +13,7 @@ ldap_connection = {'bind': (u'<%= @ldap_bind_dn %>',
  'server': '<%= @ldap_server %>',
  'type': 'ad',
  'version': 3}
-ldap_debug_log = False
+#ldap_debug_log = False
 ldap_groupspec = {'dn': u'<%= @ldap_group_dn %>', 'scope': 'sub'}
 ldap_userspec = {'dn': u'<%= @ldap_user_dn %>',
  'filter': '<%= @filter_real %>',
