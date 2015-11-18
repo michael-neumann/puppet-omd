@@ -20,7 +20,15 @@
   else
     service_out = '["' + @services.join('", "') + '"]'
   end
+
+  if @contact_group_desc.nil?
+    contact_desc = @contact_group_name
+  else
+    contact_desc = @contact_group_desc
+  end
 -%>
 
-define_contactgroups = True
+if type(define_contactgroups) != dict:
+    define_contactgroups = {}
+define_contactgroups['<%= @contact_group_name %>'] = '<%= contact_desc %>'
 service_contactgroups += [ ( '<%= @contact_group_name %>', <%= host_out %>, <%= service_out %> ), ]
