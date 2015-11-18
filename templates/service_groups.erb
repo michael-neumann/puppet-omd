@@ -20,7 +20,16 @@
   else
     service_out = '["' + @services.join('", "') + '"]'
   end
+
+  if @service_group_desc.nil?
+    svc_desc = @service_group_name
+  else
+    svc_desc = @service_group_desc
+  end
 -%>
 
-define_servicegroups = True
+if type(define_servicegroups) != dict:
+    define_servicegroups = {}
+if '<%= @service_group_name %>' not in define_servicegroups:
+    define_servicegroups['<%= @service_group_name %>'] = '<%= svc_desc %>'
 service_groups += [ ( '<%= @service_group_name %>', <%= host_out %>, <%= service_out %> ), ]

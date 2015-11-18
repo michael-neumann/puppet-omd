@@ -10,9 +10,16 @@
 #   Required parameter.
 #
 # [*service_group_name*]
-#   The name of the service group.
+#   The short name of the service group.
 #   Type: string
 #   Required parameter.
+#
+# [*service_group_desc*]
+#   The description of the service group. If left undefined
+#   the description will default to the name of the service group.
+#   Type: string
+#   Optional parameter.
+#   Defaults to undef.
 #
 # [*services*]
 #   An array of service prefixes, used to identify which services
@@ -37,6 +44,7 @@
 #
 # [*host_tags*]
 #   The tags with which to associate the check. Mutually exclusive with $hosts.
+#   Note: a host must match ALL tags provided to be included in the group.
 #   Either $hosts or $host_tags must be defined.
 #   Type: array
 #   defaults to undef
@@ -60,10 +68,12 @@
 define omd::site::service_group (
   $site,
   $service_group_name,
+  $service_group_desc,
   $services,
-  $filename     = $title,
-  $hosts        = undef,
-  $host_tags    = undef,
+  $filename           = $title,
+  $service_group_desc = undef,
+  $hosts              = undef,
+  $host_tags          = undef,
 ) {
 
   validate_re($site, '^\w+$')
