@@ -28,11 +28,12 @@ define omd::site::ldap (
   $ldap_file = "/opt/omd/sites/${site}/etc/check_mk/multisite.d/wato/global.mk"
 
   file { $ldap_file:
-    ensure  => present,
-    owner   => $site,
-    group   => $site,
-    mode    => '0660',
-    content => template('omd/global.mk.erb'),
+    ensure    => present,
+    owner     => $site,
+    group     => $site,
+    mode      => '0660',
+    show_diff => false,
+    content   => template('omd/global.mk.erb'),
   }
 
   # Enable multisite cookie auth
