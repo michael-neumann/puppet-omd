@@ -30,5 +30,6 @@
 
 if type(define_servicegroups) != dict:
     define_servicegroups = {}
-define_servicegroups['<%= @service_group_name %>'] = '<%= svc_desc %>'
+if '<%= @service_group_name %>' not in define_servicegroups:
+    define_servicegroups['<%= @service_group_name %>'] = '<%= svc_desc %>'
 service_groups += [ ( '<%= @service_group_name %>', <%= host_out %>, <%= service_out %> ), ]
