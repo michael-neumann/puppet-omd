@@ -1,5 +1,10 @@
-#!/usr/bin/ruby
+<%= @ruby_path %>
 
+##################################
+## This file is managed by puppet.
+## Any changes will be overwritten.
+###################################
+#
 # A simple nagios check that should be run as root
 # perhaps under the mcollective NRPE plugin and
 # can check when the last run was done of puppet.
@@ -10,6 +15,9 @@
 # file to determine when last Puppet ran else the age
 # of the statefile.
 #
+# 1/21/2016  --- Paramaterize statedir to support puppet 4.X
+#            --- Logic to determine appropriate directory paths for puppet 3.x and 4.x is handled
+#            --- in omd::client::checks::install
 # 19/12/2013 --- Change to lock files and handling of a puppet agent in a disabled state (WARNING)
 #            *** These changes are made to work with puppet 3.X and MAY cause some issues with 2.x users
 #            *** The script should still continue to work for 2.x, but may not handle the lockfiles correctly
@@ -17,7 +25,7 @@
 require 'optparse'
 require 'yaml'
 
-statedir = "/var/lib/puppet/state"
+statedir = <%= @puppet_statedir %>
 agent_lockfile = statedir + "/agent_catalog_run.lock"
 agent_disabled_lockfile = statedir + "/agent_disabled.lock"
 statefile = statedir + "/state.yaml"
