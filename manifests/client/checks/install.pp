@@ -2,6 +2,14 @@
 class omd::client::checks::install {
 
   $plugin_path = $omd::client::checks::params::plugin_path
+  $puppet_statedir = "${::puppet_vardir}/state"
+
+  if $::puppetversion >= "4" {
+    $ruby_path = "#!/opt/puppetlabs/puppet/bin/ruby"
+  }
+  elsif $::puppetversion < "4" {
+    $ruby_path = '#!/usr/bin/ruby'
+  }
 
   File {
     owner  => 'root',
@@ -18,12 +26,12 @@ class omd::client::checks::install {
   # install checks
   file { 'check_puppet':
     path   => "${plugin_path}/nagios/plugins/check_puppet.rb",
-    source => 'puppet:///modules/omd/checks/check_puppet.rb',
+    content => template('omd/check_puppet.erb'),
   }
 
   file { 'check_cert':
     path   => "${plugin_path}/nagios/plugins/check_cert.rb",
-    source => 'puppet:///modules/omd/checks/check_cert.rb',
+    content => template('omd/check_cert.erb'),
   }
 
 }
