@@ -2,14 +2,8 @@
 class omd::client::checks::install {
 
   $plugin_path = $omd::client::checks::params::plugin_path
+  # Requires that puppetlabs-stdlib is avaliable
   $puppet_statedir = "${::puppet_vardir}/state"
-
-  if $::puppetversion >= "4" {
-    $ruby_path = "#!/opt/puppetlabs/puppet/bin/ruby"
-  }
-  elsif $::puppetversion < "4" {
-    $ruby_path = '#!/usr/bin/ruby'
-  }
 
   File {
     owner  => 'root',
@@ -24,6 +18,7 @@ class omd::client::checks::install {
   }
 
   # install checks
+  # requires that ruby is installed and avaliable at /usr/bin/ruby
   file { 'check_puppet':
     path   => "${plugin_path}/nagios/plugins/check_puppet.rb",
     content => template('omd/check_puppet.erb'),

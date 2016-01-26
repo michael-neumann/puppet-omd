@@ -45,6 +45,8 @@ See [Overview](#overview) for now.
 For ``omd::client`` a specific version of the ``check_mk_agent`` *must* be given, since no generic Packages is downloadable. See the download page of the [check\_mk\_agent](https://mathias-kettner.de/check_mk_download.html).
 If you add the ``check_mk_agent`` package a private repository, you can set this to ``latest``.
 
+The checks for puppet require that ruby is installed. This module does not manage that, so this must be handled elsewhere. These checks also require that puppetlabs-stdlib be avaliable
+
 ###Beginning with omd
 
 Installing the server with a default site:
