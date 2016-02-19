@@ -10,6 +10,7 @@ define omd::site::users (
 ) {
   require omd::site::user_scripts
 
+  $ruby = "/usr/bin/ruby"
   $userhash = "/opt/omd/sites/${site}/puppet/userhash"
   $contacts = "/opt/omd/sites/${site}etc/check_mk/conf.d/wato/contacts.mk"
   $htpasswd = "/opt/omd/sites/${site}/etc/htpasswd"
@@ -45,7 +46,7 @@ define omd::site::users (
     owner   => 'root',
     group   => 'root',
     mode    => '0700',
-    content => merged_users,
+    content => "${merged_users}",
     notify  => [ Exec['activateChanges.rb'], Exec['contacts.rb'],
                 Exec['htpasswd.rb'], Exec['serials.rb'], Exec['users.rb'] ],
   }
@@ -62,31 +63,31 @@ define omd::site::users (
 
 ### TODO: find a way to get username of modified users
   exec { 'contacts.rb':
-    command     => "ruby ${script_dir}/contacts.rb -u ${userhash} -f ${contacts}",
+    command     => "${ruby} ${script_dir}/contacts.rb -u ${userhash} -f ${contacts}",
     refreshonly => true,
     notify      => Exec['activateChanges.rb'],
   }
 
   exec { 'htpasswd.rb':
-    command     => "ruby ${script_dir}/htpasswd.rb -u ${userhash} -f ${htpasswd}",
+    command     => "${ruby} ${script_dir}/htpasswd.rb -u ${userhash} -f ${htpasswd}",
     refreshonly => true,
     notify      => Exec['activateChanges.rb'],
   }
 
   exec { 'serials.rb':
-    command     => "ruby ${script_dir}/serials.rb -u ${userhash} -f ${serials}",
+    command     => "${ruby} ${script_dir}/serials.rb -u ${userhash} -f ${serials}",
     refreshonly => true,
     notify      => Exec['activateChanges.rb'],
   }
 
   exec { 'users.rb':
-    command     => "ruby ${script_dir}/users.rb -u ${userhash} -f /opt/omd/sites/${site}/etc/check_mk/multisite.d/wato/users.mk",
+    command     => "${ruby} ${script_dir}/users.rb -u ${userhash} -f ${users}",
     refreshonly => true,
     notify      => Exec['activateChanges.rb'],
   }
 
   exec { 'activateChanges.rb':
-    command     => "ruby ${script_dir}/activateChanges.rb -u ${automation_user} -o ${site} -s ${omd_host_url} ${secret}",
+    command     => "${ruby} ${script_dir}/activateChanges.rb -u ${automation_user} -o ${site} -s ${omd_host_url} ${secret}",
     refreshonly => true,
   }
 }

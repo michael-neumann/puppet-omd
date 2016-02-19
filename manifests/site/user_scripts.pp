@@ -3,7 +3,7 @@ class omd::site::user_scripts {
 
   file { 'scriptDir':
     ensure => directory,
-    path   => script_dir,
+    path   => $script_dir,
     owner  => 'root',
     group  => 'root',
     mode   => '0700',

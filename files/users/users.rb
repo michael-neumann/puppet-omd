@@ -85,6 +85,7 @@ fileOpen.each_with_index do |line, index|
     # Convert disable_notifications boolean to string
     line=line.gsub(/:\sTrue/, ': "True"')
     line=line.gsub(/:\sFalse/, ': "False"')
+    line=line.gsub(/(\w+),/, '"\1",' )
     # Remove last line
     file = file + line #unless fileOpen.eof?
   end
@@ -153,9 +154,14 @@ data_hash.sort.each_with_index do |(key, value), index|
     end
     if index1 == 0
       if key1 == 'alias'
-        out2 = "'#{key1}': u#{oper}#{value1}#{oper},\n"
+        out2 = "'#{key1}': u#{oper}#{value1}#{oper}"
       else
-        out2 = "'#{key1}': #{oper}#{value1}#{oper},\n"
+        out2 = "'#{key1}': #{oper}#{value1}#{oper}"
+      end
+      if index1 == (value.length-1)
+        out2 = out2 + "},\n"
+      else
+        out2 = out2 + ",\n"
       end
     elsif index1 > 0 and index1 != (value.length-1)
       out2 = "#{' '*out1.size}'#{key1}': #{oper}#{value1}#{oper},\n"
