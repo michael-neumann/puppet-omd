@@ -12,7 +12,7 @@ define omd::site::users (
 
   $ruby = "/usr/bin/ruby"
   $userhash = "/opt/omd/sites/${site}/puppet/userhash"
-  $contacts = "/opt/omd/sites/${site}etc/check_mk/conf.d/wato/contacts.mk"
+  $contacts = "/opt/omd/sites/${site}/etc/check_mk/conf.d/wato/contacts.mk"
   $htpasswd = "/opt/omd/sites/${site}/etc/htpasswd"
   $serials = "/opt/omd/sites/${site}/etc/auth.serials"
   $users = "/opt/omd/sites/${site}/etc/check_mk/multisite.d/wato/users.mk"
