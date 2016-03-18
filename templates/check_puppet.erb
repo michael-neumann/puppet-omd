@@ -25,7 +25,7 @@
 require 'optparse'
 require 'yaml'
 
-statedir = <%= @puppet_statedir %>
+statedir = '<%= @puppet_statedir %>'
 agent_lockfile = statedir + "/agent_catalog_run.lock"
 agent_disabled_lockfile = statedir + "/agent_disabled.lock"
 statefile = statedir + "/state.yaml"
