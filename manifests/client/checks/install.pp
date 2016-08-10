@@ -4,7 +4,15 @@ class omd::client::checks::install {
   $plugin_path = $omd::client::checks::params::plugin_path
   # Requires that puppetlabs-stdlib is avaliable
   $puppet_statedir = "${::puppet_vardir}/state"
-  $ruby_dir = $omd::client::checks::params::ruby_dir
+
+  if versioncmp($::puppetversion, '4') >= 0 {
+    # Version 4.0.0 or newer
+    $ruby_path = '#!/opt/puppetlabs/puppet/bin/ruby'
+  }
+  elsif versioncmp($::puppetversion, '4') < 0 {
+    # Version 3.x.x or older
+    $ruby_path = '#!/usr/bin/ruby'
+  }
 
   File {
     owner  => $omd::client::checks::params::file_owner,
