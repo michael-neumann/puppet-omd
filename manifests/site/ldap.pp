@@ -1,10 +1,10 @@
 define omd::site::ldap (
-  $site = $title,
   $ldap_server,
   $ldap_bind_dn,
   $ldap_bind_pw,
   $ldap_group_dn,
   $ldap_user_dn,
+  $site             = $title,
   $ldap_port        = '389',
   $ldap_user_filter = undef,
   $ldap_user_group  = undef,

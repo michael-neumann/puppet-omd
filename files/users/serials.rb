@@ -54,16 +54,16 @@ class String
         hash[key_value[0]][key3[0]]=key3[1]
       end
     end
-    return hash
+    hash
   end
 end
 
-# gsub is removing the '{' & '}'s in the string then parsing the string into a nested hash
+# tr is removing the '{' & '}'s in the string then parsing the string into a nested hash
 user_file = File.open(options[:users])
-user_hash = user_file.read.gsub(/^{/, '').gsub(/}$/, '').gsub(/}$/, '').to_h()
+user_hash = user_file.read.tr("{}", "").to_h()
 
 # parses the current auth.serials into a hash
-fileRead = File.open(options[:file], "r").read.each_line do |line|
+File.open(options[:file], "r").read.each_line do |line|
   key,value = line.split ':',2
   serial_hash[key] = value
 end
@@ -71,7 +71,7 @@ end
 # if serial file doesn't contain a managed users add them to the serial
 # hash with a default value of 0
 user_hash.to_a.each do |key,value|
-  if !serial_hash.has_key?(key)
+  if !serial_hash.key?(key)
     serial_hash[key]='0'
   end
 end

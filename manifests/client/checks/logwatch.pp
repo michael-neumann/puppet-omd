@@ -30,7 +30,7 @@ define omd::client::checks::logwatch (
 ) {
   validate_re($name, '^\w+$')
 
-  include 'omd::client::checks'
+  include '::omd::client::checks'
 
   if ! $omd::client::logwatch_install {
     fail('$logwatch_install on omd::client must be true!')

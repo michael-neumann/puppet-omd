@@ -2,7 +2,7 @@
 class omd::server::install::redhat {
 
   if $omd::server::configure_repo {
-    include 'epel'
+    include '::epel'
 
     $rhel_ver = "rhel${::operatingsystemmajrelease}"
     # architecture irrelevant -> noarch

@@ -42,7 +42,7 @@ class omd::client::checks::puppet (
   validate_re($crit, '^\d+$')
   validate_string($options)
 
-  include 'omd::client::checks'
+  include '::omd::client::checks'
 
   $plugin_path = $omd::client::checks::params::plugin_path
   $content = "Puppet_Agent\t${plugin_path}/nagios/plugins/check_puppet.rb -w ${warn} -c ${crit} ${options}\n"

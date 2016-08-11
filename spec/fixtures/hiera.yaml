@@ -1,0 +1,8 @@
+---
+:backends:
+  - yaml
+:yaml:
+  :datadir: './spec/fixtures/hiera'
+:hierarchy:
+  - '%{::clientcert}'
+  - 'puppet_omd_data'

@@ -1,3 +1,10 @@
---relative
---no-80chars-check
---no-class_inherits_from_params_class-check
+# Use this file to instruct puppet-lint to ignore certain checks.
+# For the complete list of checks and flags to disable them,
+# refer to <http://puppet-lint.com/checks/>.
+
+# Examples (uncomment before use):
+--no-140chars-check
+#--no-class_inherits_from_params_class-check
+#--no-inherits_across_namespaces-check
+--no-documentation-check
+--no-quoted_booleans-check

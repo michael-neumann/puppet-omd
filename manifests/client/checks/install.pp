@@ -11,7 +11,7 @@ class omd::client::checks::install {
   }
   elsif versioncmp($::puppetversion, '4') < 0 {
     # Version 3.x.x or older
-    $ruby_path = '#!/usr/bin/ruby'
+    $ruby_path = "#!${$omd::client::checks::params::ruby_os}"
   }
 
   File {

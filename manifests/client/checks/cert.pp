@@ -48,7 +48,7 @@ define omd::client::checks::cert (
   validate_absolute_path($path)
   validate_string($options)
 
-  include 'omd::client::checks'
+  include '::omd::client::checks'
 
   $name_repl = regsubst($name, '[/\s]', '_', 'G')
 

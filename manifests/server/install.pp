@@ -23,7 +23,7 @@ class omd::server::install {
     ensure        => $pkg_ensure,
     name          => $pkg_name,
     allow_virtual => true,
-    require       => Class[$install_class]
+    require       => Class[$install_class],
   }
 
 }

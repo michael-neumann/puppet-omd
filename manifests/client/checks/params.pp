@@ -10,17 +10,17 @@ class omd::client::checks::params(
     'Debian': {
       $file_owner = 'root'
       $file_group = 'root'
-      $ruby_dir   = '/usr/bin/ruby'
+      $ruby_os    = '/usr/bin/ruby'
     }
     'RedHat': {
       $file_owner = 'root'
       $file_group = 'root'
-      $ruby_dir   = '/usr/bin/ruby'
+      $ruby_os    = '/usr/bin/ruby'
     }
     'FreeBSD': {
       $file_owner = 'root'
       $file_group = 'wheel'
-      $ruby_dir   = '/usr/local/bin/ruby'
+      $ruby_os    = '/usr/local/bin/ruby'
     }
     default: {
       fail("${::osfamily} not supported")

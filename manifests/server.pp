@@ -57,8 +57,8 @@ class omd::server (
   validate_re($repo, '^stable|testing$')
   validate_hash($sites)
 
-  contain 'omd::server::install'
-  contain 'omd::server::config'
+  contain '::omd::server::install'
+  contain '::omd::server::config'
 
   Class['omd::server::install'] ->
   Class['omd::server::config']

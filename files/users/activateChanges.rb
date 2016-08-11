@@ -67,7 +67,7 @@ end
 if ( options[:username] != nil and ( options[:password] or options[:file] ) )
   # if the automation users automation.secret file is specified obtain the secret from there
   if options[:file] != nil
-    file = File.open("#{options[:file]}", 'r')
+    file = File.open(options[:file].to_s, 'r')
     if File.exists?(file)
       secret = file.read.delete!("\n")
       file.close
@@ -81,7 +81,7 @@ if ( options[:username] != nil and ( options[:password] or options[:file] ) )
   # use check_mk's automation api to activate our changes
   uri = URI.parse("http://#{options[:site_url]}/#{options[:omd_site]}/check_mk/webapi.py?action=activate_changes&_username=#{options[:username]}&_secret=#{secret}&mode=all&allow_foreign_changes=1")
   http = Net::HTTP.new(uri.host, uri.port)
-  response = http.request(Net::HTTP::Get.new(uri.request_uri))
+  http.request(Net::HTTP::Get.new(uri.request_uri))
 else
   exit 1
 end

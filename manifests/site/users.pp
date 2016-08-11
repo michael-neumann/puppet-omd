@@ -141,7 +141,7 @@ define omd::site::users (
   $omd_host_url = '127.0.0.1',
   $script_dir = '/opt/omd/puppet'
 ) {
-  require omd::site::user_scripts
+  require ::omd::site::user_scripts
 
   validate_hash($managed_users)
   validate_bool($enable_omdadmin)
@@ -149,7 +149,7 @@ define omd::site::users (
   validate_absolute_path($script_dir)
   validate_re($omd_host_url, ['\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}', '(?:w+\.)?\w+(?:\.\w+)?'])
 
-  $ruby = "/usr/bin/ruby"
+  $ruby = '/usr/bin/ruby'
   $userhash = "/opt/omd/sites/${site}/puppet/userhash"
   $contacts = "/opt/omd/sites/${site}/etc/check_mk/conf.d/wato/contacts.mk"
   $htpasswd = "/opt/omd/sites/${site}/etc/htpasswd"
@@ -190,7 +190,7 @@ define omd::site::users (
     owner   => 'root',
     group   => 'root',
     mode    => '0700',
-    content => "${merged_users}",
+    content => $merged_users,
     notify  => [ Exec['activateChanges.rb'], Exec['contacts.rb'],
                 Exec['htpasswd.rb'], Exec['serials.rb'], Exec['users.rb'] ],
   }

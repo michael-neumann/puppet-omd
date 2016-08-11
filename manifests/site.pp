@@ -95,11 +95,11 @@ define omd::site  (
   validate_bool($config_hosts)
 
   # cannot require omd::server -> creates cyclic dependency
-  include omd::server
-  require omd::server::install
+  include ::omd::server
+  require ::omd::server::install
 
   Exec {
-    path => ['/bin', '/usr/bin']
+    path => ['/bin', '/usr/bin'],
   }
 
   # generic to trigger

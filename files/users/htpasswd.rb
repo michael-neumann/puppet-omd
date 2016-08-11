@@ -51,42 +51,37 @@ class String
         hash[key_value[0]][key3[0]]=key3[1]
       end
     end
-    return hash
+    hash
   end
 end
 
 # gsub is removing the '{' & '}'s in the string then parsing the string into a nested hash
 user_file = File.open(options[:users])
-user_hash = user_file.read.gsub(/^{/, '').gsub(/}$/, '').gsub(/}$/, '').to_h()
+user_hash = user_file.read.tr("{}", "").to_h()
 
 # parses the current htpasswd into a hash
-fileRead = File.open(options[:file], "r").read.each_line do |line|
+File.open(options[:file], "r").read.each_line do |line|
   key,value = line.split ':',2
   htpasswd_hash[key] = value
 end
 
 # If htpasswd file doesn't reflect the information provided about managed users, change it to match.
 # This will not alter unmanaged users
-user_hash.to_a.each do |key, value|
-  if user_hash[key].has_key?('password') and user_hash[key]['password'] != ''
-    # password specified and is not an empty string
-    if user_hash[key].has_key?('locked') and user_hash[key]['locked'] == 'True'
-      # user is locked
-      htpasswd_hash[key] = '!'+user_hash[key]['password']
-    else
-      # user is not locked
-      htpasswd_hash[key] = user_hash[key]['password']
-    end
+user_hash.to_a.each do |key, _value|
+  if user_hash[key].key?('password') && user_hash[key]['password'] != ''
+    # password specified && is not an empty string
+    htpasswd_hash[key] = if user_hash[key].key?('locked') && user_hash[key]['locked'] == 'True'
+                           # user is locked
+                           '!' + user_hash[key]['password']
+                         else
+                           # user is not locked
+                           user_hash[key]['password']
+                         end
+  elsif user_hash[key].key?('locked') && user_hash[key]['locked'] == 'True'
+    htpasswd_hash[key] = '!'
   else
-    # password not present or was empty string
-    if user_hash[key].has_key?('locked') and user_hash[key]['locked'] == 'True'
-      # user is locked
-      htpasswd_hash[key] = '!'
-    else
-      puts key + ' doesnt have a password and is not locked :\'('
-      exit 1
-      # if the user has neither a password nor is locked... well this should never be the case
-    end
+    puts key + ' doesnt have a password && is not locked :\'('
+    exit 1
   end
 end
 

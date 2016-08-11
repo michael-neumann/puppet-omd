@@ -7,7 +7,7 @@ define omd::site::service (
   validate_bool($reload)
 
   Exec {
-    path => ['/bin', '/usr/bin']
+    path => ['/bin', '/usr/bin'],
   }
 
 
