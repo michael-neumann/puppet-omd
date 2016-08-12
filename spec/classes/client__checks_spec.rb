@@ -49,7 +49,7 @@ describe 'omd::client::checks' do
     it do
       is_expected.to contain_file("check_puppet").with(
         :path   => '/usr/local/lib/nagios/plugins/check_puppet.rb',
-        :source => 'puppet:///modules/omd/checks/check_puppet.rb',
+#        :source => 'puppet:///modules/omd/checks/check_puppet.rb',
         :owner  => 'root',
         :group  => 'root',
         :mode   => '0755'
@@ -59,7 +59,7 @@ describe 'omd::client::checks' do
     it do
       is_expected.to contain_file("check_cert").with(
         :path   => '/usr/local/lib/nagios/plugins/check_cert.rb',
-        :source => 'puppet:///modules/omd/checks/check_cert.rb',
+#        :source => 'puppet:///modules/omd/checks/check_cert.rb',
         :owner  => 'root',
         :group  => 'root',
         :mode   => '0755'

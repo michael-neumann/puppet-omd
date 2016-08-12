@@ -104,8 +104,8 @@ describe 'omd::server' do
             :release     => 'wheezy',
             :repos       => 'main',
             :key         => {
-              :id      => 'F2F97737B59ACCC92C23F8C7F8C1CA08A57B9ED7',
-              :content => /mI0EThw4TQEEA/
+              'id'      => 'F2F97737B59ACCC92C23F8C7F8C1CA08A57B9ED7',
+              'content' => /mI0EThw4TQEEA/
             }
           )
         end
@@ -126,8 +126,8 @@ describe 'omd::server' do
             :release     => 'trusty',
             :repos       => 'main',
             :key         => {
-              :id      => 'F2F97737B59ACCC92C23F8C7F8C1CA08A57B9ED7',
-              :content => /mI0EThw4TQEEA/
+              'id'      => 'F2F97737B59ACCC92C23F8C7F8C1CA08A57B9ED7',
+              'content' => /mI0EThw4TQEEA/
             }
           )
         end

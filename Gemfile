@@ -19,6 +19,7 @@ group :test do
   gem "puppet-lint-classes_and_types_beginning_with_digits-check"
   gem "puppet-lint-unquoted_string-check"
   gem "safe_yaml"
+  gem "rspec-puppet-utils"
 end
 
 group :development do
