@@ -210,6 +210,33 @@ describe 'omd::client' do
       end
     end
 
+    context 'on FreeBSD like systems' do
+      let(:facts) do
+        {
+          :osfamily        => 'FreeBSD',
+          :operatingsystem => 'FreeBSD'
+        }
+      end
+
+      it do
+        is_expected.to contain_wget__fetch('check_mk_agent.freebsd').with(
+          'source'      => 'http://git.mathias-kettner.de/git/?p=check_mk.git;a=blob_plain;f=agents/check_mk_agent.freebsd;hb=refs/heads/1.2.4',
+          'destination' => '/usr/local/bin/check_mk_agent',
+          'unless'      => 'test -f /usr/local/bin/check_mk_agent',
+          'before'      => 'File[/usr/local/bin/check_mk_agent]'
+        )
+      end
+
+      it do
+        is_expected.to contain_file('/usr/local/bin/check_mk_agent').with(
+          'ensure' => 'present',
+          'owner'  => 'root',
+          'group'  => 'wheel',
+          'mode'   => '0755'
+        )
+      end
+    end
+
     context 'with parameter check_mk_version => 1.2.3' do
       let(:params) do
         {

@@ -20,7 +20,7 @@ fixtures:
       ref: "1.1.1"
     wget:
       repo: "git://github.com/maestrodev/puppet-wget.git"
-      ref:  "v1.5.7"
+      ref:  "v1.7.3"
     puppetdbquery:
       repo: "git://github.com/dalen/puppet-puppetdbquery"
       ref: "1.5.2"
