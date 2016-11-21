@@ -58,7 +58,7 @@
 # }
 
 define omd::site::custom_check (
-  $site,
+  $site_name,
   $service_description,
   $filename     = $title,
   $has_perfdata = false,
@@ -68,7 +68,7 @@ define omd::site::custom_check (
   $host_tags    = undef,
 ) {
 
-  validate_re($site, '^\w+$')
+  validate_re($site_name, '^\w+$')
   validate_re($filename, '[^/\ ]')
   validate_bool($has_perfdata)
   validate_string($service_description)
@@ -103,14 +103,14 @@ define omd::site::custom_check (
     $filename_real = "${filename}.mk"
   }
 
-  $path = "/opt/omd/sites/${site}/etc/check_mk/conf.d"
+  $path = "/opt/omd/sites/${site_name}/etc/check_mk/conf.d"
 
   file { "${path}/${filename_real}":
     ensure  => present,
-    owner   => $site,
-    group   => $site,
+    owner   => $site_name,
+    group   => $site_name,
     mode    => '0644',
     content => template('omd/custom_check.erb'),
-    notify  => Exec["check_mk update site: ${site}"],
+    notify  => Exec["check_mk update site: ${site_name}"],
   }
 }

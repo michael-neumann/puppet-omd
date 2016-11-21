@@ -37,9 +37,11 @@ class omd::client::checks::puppet (
   $warn    = '3600',
   $crit    = '7200',
   $options = '',
-) {
-  validate_re($warn, '^\d+$')
-  validate_re($crit, '^\d+$')
+) inherits omd::client::checks::params {
+  validate_integer($warn)
+  validate_integer($crit)
+  #  validate_re($warn, '^\d+$')
+  #  validate_re($crit, '^\d+$')
   validate_string($options)
 
   include '::omd::client::checks'

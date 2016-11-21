@@ -1,6 +1,6 @@
 # (private) defaults for omd::client::checks
 class omd::client::checks::params(
-  #  $omd_master_vardir = $::puppet_vardir
+    $omd_master_vardir = $::puppet_vardir
 ) {
 
   $mrpe_config = '/etc/check_mk/mrpe.cfg'

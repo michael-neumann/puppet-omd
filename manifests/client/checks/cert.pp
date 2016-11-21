@@ -43,8 +43,10 @@ define omd::client::checks::cert (
   $path    = $name,
   $options = '',
 ) {
-  validate_re($warn, '^\d+$')
-  validate_re($crit, '^\d+$')
+  #  validate_re($warn, '^\d+$')
+  #  validate_re($crit, '^\d+$')
+  validate_integer($warn)
+  validate_integer($crit)
   validate_absolute_path($path)
   validate_string($options)
 

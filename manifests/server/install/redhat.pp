@@ -9,7 +9,7 @@ class omd::server::install::redhat {
     package{ 'omd-repository':
       ensure   => latest,
       name     => "labs-consol-${omd::server::repo}",
-      source   => "https://labs.consol.de/repo/${omd::server::repo}/${rhel_ver}/i386/labs-consol-${omd::server::repo}.${rhel_ver}.noarch.rpm",
+      source   => "https://labs.consol.de/repo/${omd::server::repo}/${rhel_ver}/${::architecture}/labs-consol-${omd::server::repo}.${rhel_ver}.noarch.rpm",
       provider => rpm,
     }
   }

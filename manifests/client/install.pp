@@ -7,7 +7,6 @@ class omd::client::install {
 
     case $::osfamily {
       'Debian': {
-
         $pkg_agent    = "check-mk-agent_${omd::client::check_mk_version}_all.deb"
         $pkg_logwatch = "check-mk-agent-logwatch_${omd::client::check_mk_version}_all.deb"
 
@@ -17,25 +16,20 @@ class omd::client::install {
         }
 
         if $omd::client::logwatch_install {
-
           staging::file { $pkg_logwatch:
             source => "${download_source}/${pkg_logwatch}",
             before => Package['check_mk-agent-logwatch'],
           }
-
         }
 
         $pkg_source_agent    = "/opt/staging/omd/${pkg_agent}"
         $pkg_source_logwatch = "/opt/staging/omd/${pkg_logwatch}"
         $pkg_provider        = 'dpkg'
-
       }
       'RedHat': {
-
         $pkg_source_agent    = "${download_source}/check_mk-agent-${omd::client::check_mk_version}.noarch.rpm"
         $pkg_source_logwatch = "${download_source}/check_mk-agent-logwatch-${omd::client::check_mk_version}.noarch.rpm"
         $pkg_provider        = 'rpm'
-
       }
       'FreeBSD': {
         if $omd::client::check_mk_version =~ /(1\.(?:(?:2\.(?:8|6|4|2|0))|(?:1\.(?:12|10|8)))).*/ {
@@ -54,7 +48,7 @@ class omd::client::install {
     }
   } else {
     $pkg_source_agent    = undef
-    $pkg_source_logwtach = undef
+    $pkg_source_logwatch = undef
     $pkg_provider        = undef
   }
 
@@ -97,7 +91,7 @@ class omd::client::install {
         source   => $pkg_source_logwatch,
         provider => $pkg_provider,
         require  => [ Package['check_mk-agent'],
-                      File['/etc/check_mk'], ],
+        File['/etc/check_mk'], ],
       }
 
       file { '/etc/check_mk/logwatch.cfg':
@@ -114,7 +108,6 @@ class omd::client::install {
         group  => $omd::client::group,
         mode   => '0755',
       }
-
     }
   }
 }

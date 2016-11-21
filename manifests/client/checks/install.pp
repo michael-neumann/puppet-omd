@@ -1,5 +1,5 @@
 # (private) install checks
-class omd::client::checks::install {
+class omd::client::checks::install inherits omd::client::checks::params {
 
   $plugin_path = $omd::client::checks::params::plugin_path
   # Requires that puppetlabs-stdlib is avaliable

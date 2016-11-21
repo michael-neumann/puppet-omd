@@ -68,7 +68,6 @@
 define omd::site::service_group (
   $site,
   $service_group_name,
-  $service_group_desc,
   $services,
   $filename           = $title,
   $service_group_desc = undef,
