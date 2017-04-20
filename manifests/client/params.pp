@@ -17,7 +17,7 @@ class omd::client::params {
       $group            = 'root'
     }
     'RedHat': {
-      $package_name     = 'check_mk-agent'
+      $package_name     = 'check-mk-agent'
       $download_source  = 'http://mathias-kettner.de/download'
       $check_agent      = '/usr/bin/check_mk_agent'
       $user             = 'root'
