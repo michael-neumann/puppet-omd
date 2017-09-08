@@ -11,6 +11,10 @@ class omd::server::install {
       $pkg_ensure = 'present'
       $pkg_name   = "omd-${omd::server::ensure}"
     }
+    /^labs/: {
+      $pkg_ensure = 'present'
+      $pkg_name = "omd-${omd::server::ensure}"
+    }
     default:    {
       $pkg_ensure = $omd::server::ensure
       # inline template, as long as lookup() only in future_parser (or in module hiera?)
