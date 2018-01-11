@@ -1,10 +1,10 @@
 # (private) configure checks
-class omd::client::checks::config {
+class omd::client::checks::config inherits omd::client::params {
 
   concat { $omd::client::checks::params::mrpe_config:
     ensure => present,
-    owner  => $omd::client::user,
-    group  => $omd::client::group,
+    owner  => $omd::client::params::user,
+    group  => $omd::client::params::group,
     mode   => '0644',
   }
 

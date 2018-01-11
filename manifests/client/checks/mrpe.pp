@@ -38,7 +38,7 @@ define omd::client::checks::mrpe (
   validate_absolute_path($path)
   validate_string($options)
 
-  include 'omd::client::checks'
+  include '::omd::client::checks'
 
   $content = "${name}\t${path} ${options}\n"
   concat::fragment { "check_mrpe_${name}":

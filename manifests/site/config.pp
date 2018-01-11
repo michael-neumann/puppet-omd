@@ -8,5 +8,5 @@ define omd::site::config (
   $option_strings = prefix($key_vals, "${name} - ")
 
   omd::site::config_variable { $option_strings: }
-  
+
 }

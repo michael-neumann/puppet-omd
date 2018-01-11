@@ -1,0 +1,28 @@
+<% 
+  # either ["hosts"] or ["tags"], ALL_HOSTS
+  if !@hosts.nil?
+    host_out = '["' + @hosts.join('", "') + '"]'
+  else
+    host_out = '["' + @host_tags.join('", "') + '"], ALL_HOSTS'
+  end
+
+  if !@command.nil?
+    c_out = " 'command_line': '" + @command + "',"
+  else
+    c_out = ''
+  end
+
+  if !@command_name.nil?
+    cn_out = " 'command_name': '" + @command_name + "',"
+  else
+    cn_out = ''
+  end
+
+  # convert has_perfdata bool to True or False
+  if @has_perfdata
+    hpd_out = "True"
+  else
+    hpd_out = "False"
+  end
+-%>
+custom_checks += [ ( {'service_description': '<%= @service_description %>',<%= c_out %><%= cn_out %> 'has_perfdata': <%= hpd_out %>}, <%= host_out %>), ]

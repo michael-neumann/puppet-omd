@@ -96,8 +96,11 @@ class omd::client (
   validate_string($user)
   validate_string($group)
 
-  contain omd::client::install
-  contain omd::client::config
+  #  include ::omd::client::install
+  #  include ::omd::client::config
+
+  contain ::omd::client::install
+  contain ::omd::client::config
 
   Class['omd::client::install'] ->
   Class['omd::client::config']

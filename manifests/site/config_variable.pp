@@ -1,7 +1,7 @@
 # (private) omd::site::config_variable resource
 define omd::site::config_variable {
 
-  include omd::site::params
+  include ::omd::site::params
 
   $split = split($name, ' - | = ')
 
@@ -14,7 +14,7 @@ define omd::site::config_variable {
   }
 
   Exec {
-    path => ['/bin', '/usr/bin']
+    path => ['/bin', '/usr/bin'],
   }
 
   # site must be stopped for changes

@@ -2,15 +2,17 @@ require 'spec_helper'
 
 describe 'omd::site::service' do
   let(:title) { 'default' }
-  let(:default_params) {{
-    :ensure => 'running',
-    :reload => false,
-  }}
+  let(:default_params) do
+    {
+      :ensure => 'running',
+      :reload => false,
+    }
+  end
   let(:params) { default_params }
 
   it { is_expected.to contain_omd__site__service('default') }
 
-# TODO enable => _true/ false  - omd enable/disable
+  # TODO enable => _true/ false  - omd enable/disable
   it do
     is_expected.to contain_exec('start omd site: default').with({
       :command => 'omd start default',
@@ -55,6 +57,4 @@ describe 'omd::site::service' do
     let(:params) { default_params.merge({ :reload => 'breakme' } )}
     it { is_expected.to raise_error(/is not a boolean/) }
   end
-
-
 end

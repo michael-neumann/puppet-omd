@@ -42,7 +42,7 @@ define omd::host (
   validate_re($name, '^\w+$')
   # folder/tags are validated in subclass omd::client::export
 
-  include 'omd::client'
+  include '::omd::client'
 
   @@omd::host::export{ "${name} - ${::fqdn}":
     folder         => $folder,

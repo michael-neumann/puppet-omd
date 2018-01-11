@@ -80,26 +80,36 @@ define omd::site  (
   $config_hosts_folders = ['collected_hosts'],
   $main_mk_content      = undef,
 ) {
-  validate_re($name, '^\w+$')
+
+  #  validate_re($name, '^\w+$')
+  validate_string($name)
   validate_re($ensure, '^present|absent$')
   if $uid {
-    validate_re($uid, '\d+')
+    validate_integer($uid)
     $_uid = "--uid ${uid} "
   }
+  else {
+    $_uid = undef
+  }
+
   if $gid {
-    validate_re($gid, '\d+')
+    validate_integer($gid)
     $_gid = "--gid ${gid} "
   }
+  else {
+    $_gid = undef
+  }
+
   # $service_* validation in omd::service
   # $options validation in omd::config
   validate_bool($config_hosts)
 
   # cannot require omd::server -> creates cyclic dependency
-  include omd::server
-  require omd::server::install
+  include ::omd::server
+  require ::omd::server::install
 
   Exec {
-    path => ['/bin', '/usr/bin']
+    path => ['/bin', '/usr/bin'],
   }
 
   # generic to trigger

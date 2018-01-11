@@ -14,12 +14,6 @@
     "check-mk",
     "monitoring"
   ],
-  "requirements": [
-    {
-      "name": "puppet",
-      "version_requirement": ">= 3.6.0 <4.0.0"
-    }
-  ],
   "operatingsystem_support": [
     {
       "operatingsystem": "Ubuntu",

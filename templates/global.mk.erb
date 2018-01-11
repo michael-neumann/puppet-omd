@@ -1,0 +1,22 @@
+##############################################
+# This file is managed by Puppet
+# Any changes made in WATO will be overwritten
+# ############################################
+
+ldap_cache_livetime = 300
+ldap_active_plugins = {'alias': {}, 'auth_expire': {}, 'email': {}}
+ldap_connection = {'bind': (u'<%= @ldap_bind_dn %>',
+          '<%= @ldap_bind_pw %>'),
+ 'connect_timeout': 2.0,
+ 'page_size': 1000,
+ 'port': <%= @ldap_port %>,
+ 'server': '<%= @ldap_server %>',
+ 'type': 'ad',
+ 'version': 3}
+#ldap_debug_log = False
+ldap_groupspec = {'dn': u'<%= @ldap_group_dn %>', 'scope': 'sub'}
+ldap_userspec = {'dn': u'<%= @ldap_user_dn %>',
+ 'filter': '<%= @filter_real %>',
+ 'scope': 'sub',
+ 'user_id_umlauts': 'replace'}
+user_connectors = ['htpasswd', 'ldap']

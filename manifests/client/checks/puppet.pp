@@ -37,15 +37,19 @@ class omd::client::checks::puppet (
   $warn    = '3600',
   $crit    = '7200',
   $options = '',
-) {
-  validate_re($warn, '^\d+$')
-  validate_re($crit, '^\d+$')
+) inherits omd::client::checks::params {
+  validate_integer($warn)
+  validate_integer($crit)
+  #  validate_re($warn, '^\d+$')
+  #  validate_re($crit, '^\d+$')
   validate_string($options)
 
-  include 'omd::client::checks'
+  include '::omd::client::checks'
 
   $plugin_path = $omd::client::checks::params::plugin_path
   $content = "Puppet_Agent\t${plugin_path}/nagios/plugins/check_puppet.rb -w ${warn} -c ${crit} ${options}\n"
+  $omd_master_vardir = $omd::client::checks::params::omd_master_vardir
+
   concat::fragment { 'check_puppet':
     target  => $omd::client::checks::params::mrpe_config,
     content => $content,
@@ -54,7 +58,7 @@ class omd::client::checks::puppet (
   }
 
   # reinventorize trigger if a MRPE check changed
-  @@file { "${::puppet_vardir}/omd/check_puppet_${::fqdn}":
+  @@file { "${omd_master_vardir}/omd/check_puppet_${::fqdn}":
     ensure  => present,
     owner   => root,
     group   => root,

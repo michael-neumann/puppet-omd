@@ -1,0 +1,35 @@
+##################################
+# This file is managed by puppet.
+# Any changes will be overwritten.
+##################################
+<% 
+  # either ["hosts"], or ["tags"], ALL_HOSTS or ALL_HOSTS
+  if !@hosts.nil?
+    if @hosts.include? 'ALL_HOSTS'
+      host_out = 'ALL_HOSTS'
+    else 
+      host_out = '["' + @hosts.join('", "') + '"]'
+    end
+  else
+    host_out = '["' + @host_tags.join('", "') + '"], ALL_HOSTS'
+  end
+
+  # either ["svc_prefixes"] or ALL_SERVICES
+  if @services.include? 'ALL_SERVICES'
+    service_out = 'ALL_SERVICES'
+  else
+    service_out = '["' + @services.join('", "') + '"]'
+  end
+
+  if @service_group_desc.nil?
+    svc_desc = @service_group_name
+  else
+    svc_desc = @service_group_desc
+  end
+-%>
+
+if type(define_servicegroups) != dict:
+    define_servicegroups = {}
+if '<%= @service_group_name %>' not in define_servicegroups:
+    define_servicegroups['<%= @service_group_name %>'] = '<%= svc_desc %>'
+service_groups += [ ( '<%= @service_group_name %>', <%= host_out %>, <%= service_out %> ), ]

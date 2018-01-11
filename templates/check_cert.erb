@@ -1,4 +1,14 @@
-#!/usr/bin/ruby
+<%= @ruby_path %>
+
+##################################
+### This file is managed by puppet.
+### Any changes will be overwritten.
+####################################
+##
+## 1/21/2016  --- Paramaterize statedir to support puppet 4.X
+##            --- Logic to determine appropriate directory paths for puppet 3.x and 4.x is handled
+##            --- in omd::client::checks::install
+##
 # == Synopsis
 # Simple nagios plugin to check expiry times for certificates
 # and CRLs
